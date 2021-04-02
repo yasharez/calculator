@@ -1,12 +1,4 @@
-@font-face{
-    font-family: 'digital-7';
-    src: url('digital-7.woff2') format('woff2'),
-            url('digital-7.woff') format('woff'),
-            url('digital-7.ttf') format('truetype');
-}
-
 button{
-    /* font-family: 'digital-7'; */
     font-size: 2rem;
     display:flex;
     align-items: center;
@@ -19,9 +11,9 @@ button{
     outline: none;
 }
 
-.zero-button{
-    width: 120px;
-    border-radius: 30px
+.calculator{
+    display: grid;
+    grid-template: 60px 60px 60px 60px 60px 60px / 60px 60px 60px 60px;
 }
 
 .operators {
@@ -32,4 +24,85 @@ button{
 .numbers {
     background-color: rgb(124, 124, 124);
     color: white
+}
+
+.button-0{
+    width: 120px;
+    border-radius: 30px
+}
+
+.button-clear{
+    
+}
+
+.button-sign{
+    
+}
+
+.button-percent{
+    
+}
+
+.button-divide{
+    
+}
+
+.button-multiply{
+    
+}
+
+.button-add{
+    
+}
+
+.button-subtract{
+    
+}
+
+.button-equals{
+    
+}
+
+.button-dot{
+    
+}
+
+.button-0{
+    
+}
+
+.button-1{
+    
+}
+
+.button-2{
+    
+}
+
+.button-3{
+    
+}
+
+.button-4{
+    
+}
+
+.button-5{
+    
+}
+
+.button-6{
+    
+}
+
+.button-7{
+    
+}
+
+.button-8{
+    
+}
+
+.button-9{
+    
 }
