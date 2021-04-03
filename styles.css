@@ -3,6 +3,7 @@ body{
     justify-content: center;
     background-color: rgb(33, 40, 58);
     margin-top: 50px;
+    
 }
 
 button{
@@ -16,6 +17,7 @@ button{
     border-radius: 50%;
     border: 0px solid;
     outline: none;
+    font-weight: bold;
 }
 
 .calculator{
@@ -28,7 +30,7 @@ button{
     align-self: stretch;
     text-align: end;
     font-size: 3rem;
-    padding-right: 4px;
+    padding-right: 5px;
     color: white;
     grid-column: 1 / 5;
     grid-row: 1 / 1;
@@ -89,6 +91,8 @@ button{
 .button-dot{
     grid-column: 3 / 4;
     grid-row: 6 / 6;
+    background-color: rgb(124, 124, 124);
+    color: white
 }
 
 .button-0{
