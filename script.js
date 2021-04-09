@@ -22,7 +22,7 @@ numberButtons.forEach((button) => {
     button.addEventListener('click', function() {
         current += button.textContent;
         display.textContent = current;
-        console.log(total, current);
+        console.log(`number button log: total: ${total}, current: ${current}`);
     });
 });
 
@@ -63,13 +63,14 @@ addBtn.addEventListener('click', function(){
     total = current;
     current = '';
     display.textContent = '0';
+    console.log(`add button log: total: ${total}, current: ${current}`);
     addResult = add(total, current);
     equals.addEventListener('click', function(){
+        console.log(`equal button log: total: ${total}, current: ${current}`);
+        addResult = add(total, current);
         display.textContent = String(addResult);
-        console.log(total, current, addResult); //Was stuck here
-
-    })
-})
+    });
+});
 
 function add (num1, num2){
     num1 = Number(num1);
