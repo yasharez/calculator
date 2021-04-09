@@ -60,17 +60,50 @@ sign.addEventListener('click', function(){
 });
 
 addBtn.addEventListener('click', function(){
+    console.log(`add1: total: ${total}, current: ${current}, addResult: ${addResult}`);
     total = current;
     current = '';
     display.textContent = '0';
-    console.log(`add button log: total: ${total}, current: ${current}`);
-    addResult = add(total, current);
+    console.log(`add2: total: ${total}, current: ${current}, addResult: ${addResult}`);
     equals.addEventListener('click', function(){
-        console.log(`equal button log: total: ${total}, current: ${current}`);
+        console.log(`add3: total: ${total}, current: ${current}, addResult: ${addResult}`);
         addResult = add(total, current);
         display.textContent = String(addResult);
+        total = addResult;
+        console.log(`add4: total: ${total}, current: ${current}, addResult: ${addResult}`);
     });
 });
+
+subtractBtn.addEventListener('click', function(){
+    total = current;
+    current = '';
+    display.textContent = '0';
+    equals.addEventListener('click', function(){
+        subtractResult = subtract(total, current);
+        display.textContent = String(subtractResult);
+    });
+});
+
+multiplyBtn.addEventListener('click', function(){
+    total = current;
+    current = '';
+    display.textContent = '0';
+    equals.addEventListener('click', function(){
+        multiplyResult = multiply(total, current);
+        display.textContent = String(multiplyResult);
+    });
+});
+
+divideBtn.addEventListener('click', function(){
+    total = current;
+    current = '';
+    display.textContent = '0';
+    equals.addEventListener('click', function(){
+        divideResult = divide(total, current);
+        display.textContent = String(divideResult);
+    });
+});
+
 
 function add (num1, num2){
     num1 = Number(num1);
