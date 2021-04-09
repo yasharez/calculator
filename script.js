@@ -28,6 +28,7 @@ numberButtons.forEach((button) => {
 
 clear.addEventListener('click', function() {
     current = '';
+    total = '';
     display.textContent = '0';
     period.disabled = false;
 });
@@ -60,48 +61,80 @@ sign.addEventListener('click', function(){
 });
 
 addBtn.addEventListener('click', function(){
-    console.log(`add1: total: ${total}, current: ${current}, addResult: ${addResult}`);
-    total = current;
-    current = '';
-    display.textContent = '0';
-    console.log(`add2: total: ${total}, current: ${current}, addResult: ${addResult}`);
-    equals.addEventListener('click', function(){
-        console.log(`add3: total: ${total}, current: ${current}, addResult: ${addResult}`);
+    if(total === ''){
+        total = current;
+        current = '';
+        display.textContent = '0';
+        equals.addEventListener('click', function(){
+            addResult = add(total, current);
+            display.textContent = String(addResult);
+            total = addResult;
+            console.log(`add1 log: total: ${total}, current: ${current} addResult: ${addResult}`);
+        });
+    }else{
         addResult = add(total, current);
         display.textContent = String(addResult);
         total = addResult;
-        console.log(`add4: total: ${total}, current: ${current}, addResult: ${addResult}`);
-    });
+        current = '';
+        console.log(`add2 log: total: ${total}, current: ${current} addResult: ${addResult}`);
+    }
 });
 
 subtractBtn.addEventListener('click', function(){
-    total = current;
-    current = '';
-    display.textContent = '0';
-    equals.addEventListener('click', function(){
+    if(total === ''){
+        total = current;
+        current = '';
+        display.textContent = '0';
+        equals.addEventListener('click', function(){
+            subtractResult = subtract(total, current);
+            display.textContent = String(subtractResult);
+            console.log(`sub1 log: total: ${total}, current: ${current} subtractResult: ${subtractResult}`);
+        });
+    }else{
         subtractResult = subtract(total, current);
         display.textContent = String(subtractResult);
-    });
+        total = subtractResult;
+        current = '';
+        console.log(`sub2 log: total: ${total}, current: ${current} subtractResult: ${subtractResult}`);
+    }
 });
 
 multiplyBtn.addEventListener('click', function(){
-    total = current;
-    current = '';
-    display.textContent = '0';
-    equals.addEventListener('click', function(){
+    if(total === ''){
+        total = current;
+        current = '';
+        display.textContent = '0';
+        equals.addEventListener('click', function(){
+            multiplyResult = multiply(total, current);
+            display.textContent = String(multiplyResult);
+            console.log(`mult1 log: total: ${total}, current: ${current} multiplyResult: ${multiplyResult}`);
+        });
+    }else{
         multiplyResult = multiply(total, current);
         display.textContent = String(multiplyResult);
-    });
+        total = multiplyResult;
+        current = '';
+        console.log(`mult2 log: total: ${total}, current: ${current} multiplyResult: ${multiplyResult}`);
+    }
 });
 
 divideBtn.addEventListener('click', function(){
-    total = current;
-    current = '';
-    display.textContent = '0';
-    equals.addEventListener('click', function(){
+    if(total === ''){
+        total = current;
+        current = '';
+        display.textContent = '0';
+        equals.addEventListener('click', function(){
+            divideResult = divide(total, current);
+            display.textContent = String(divideResult);
+            console.log(`div1 log: total: ${total}, current: ${current} divideResult: ${divideResult}`);
+        });
+    }else{
         divideResult = divide(total, current);
         display.textContent = String(divideResult);
-    });
+        total = divideResult;
+        current = '';
+        console.log(`div2 log: total: ${total}, current: ${current} divideResult: ${divideResult}`);
+    }
 });
 
 
