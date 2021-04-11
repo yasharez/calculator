@@ -1,13 +1,14 @@
+// Calculator Web Application
+// Developed by Yashar Zafari for The Odin Project
+// github: yasharez
+
+// Initialize variables we will need later on
 let total = '';
 let current = '';
-// let addResult;
-// let subtractResult;
-// let mulitplyResult;
-// let divideResult;
 let result;
-let divText = '\u00F7';
-let multText = '\u00D7';
+let previousOperator = '';
 
+// Grab the needed DOM elements
 const display = document.getElementById('display');
 const numberButtons = document.querySelectorAll('.numbers');
 const period = document.getElementById('dot');
@@ -15,12 +16,9 @@ const del = document.getElementById('del');
 const clear = document.getElementById('clear');
 const sign = document.getElementById('sign');
 const operators = document.querySelectorAll('.operators');
-const addBtn = document.getElementById('add');
-const subtractBtn = document.getElementById('subtract');
-const multiplyBtn = document.getElementById('multiply');
-const divideBtn = document.getElementById('divide');
 const equals = document.getElementById('equals');
 
+// Populate the display and 'current' variable with numbers inputted by user
 numberButtons.forEach((button) => {
     button.addEventListener('click', function() {
         current += button.textContent;
@@ -29,6 +27,7 @@ numberButtons.forEach((button) => {
     });
 });
 
+// Function that clears display and 'current' variable
 clear.addEventListener('click', function() {
     current = '';
     total = '';
@@ -36,12 +35,14 @@ clear.addEventListener('click', function() {
     period.disabled = false;
 });
 
+// Function that adds a decimal to display/'current' variable
 period.addEventListener('click', function(){
     period.disabled = true;
     current += period.textContent;
     display.textContent = current;
 });
 
+// Function that removes last display entry
 del.addEventListener('click', function(){
     let deleted = current.slice(current.length - 1);
     current = current.slice(0, current.length - 1)
@@ -51,6 +52,7 @@ del.addEventListener('click', function(){
     };
 });
 
+// Function to change sign of 'current' variable
 sign.addEventListener('click', function(){
     if(current.length > 0){
         if(current.slice(0,1) !== '-'){
@@ -68,46 +70,16 @@ operators.forEach((button) => {
         if(total === ''){
             total = current;
             current = '';
-            display.textContent = '0';
+            display.textContent = String(total);
             equals.addEventListener('click', function(){
-                switch(button.textContent){
-                    case '+':
-                        result = add(total, current);
-                        break;
-                    case '-':
-                        result = subtract(total, current);
-                        break;
-                    case '\u00F7':
-                        result = divide(total, current);
-                        break;
-                    case '\u00D7':
-                        result = multiply(total, current);
-                        break;
-                };
-                display.textContent = String(result);
+                result = operate(button.textContent, total, current);
+                display.textContent = result;
                 total = result;
                 console.log(`total: ${total}, current: ${current} result: ${result}`);
             });
         }else{
-            switch(button.textContent){
-                case '+':
-                    result = add(total, current);
-                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
-                    break;
-                case '-':
-                    result = subtract(total, current);
-                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
-                    break;
-                case '\u00F7':
-                    result = divide(total, current);
-                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
-                    break;
-                case '\u00D7':
-                    result = multiply(total, current);
-                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
-                    break;
-            };
-            display.textContent = String(result);
+            result = operate(button.textContent, total, current);
+            display.textContent = result;
             total = result;
             current = '';
             console.log(`total: ${total}, current: ${current} result: ${result}`);
@@ -115,26 +87,25 @@ operators.forEach((button) => {
     });
 });
 
-function add (num1, num2){
-    num1 = Number(num1);
-    num2 = Number(num2);
-    return num1 + num2;
+// Function that outputs the result of two entries and operator
+function operate(operator, num1, num2){
+    switch(operator){
+        case '+':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 + num2);
+        case '-':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 - num2);
+        case '\u00F7':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 / num2);
+        case '\u00D7':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 / num2);
+    };
 };
 
-function subtract (num1, num2){
-    num1 = Number(num1);
-    num2 = Number(num2);
-    return num1 - num2;
-};
-
-function multiply (num1, num2){
-    num1 = Number(num1);
-    num2 = Number(num2);
-    return num1 * num2;
-};
-
-function divide (num1, num2){
-    num1 = Number(num1);
-    num2 = Number(num2);
-    return num1 / num2;
-};
