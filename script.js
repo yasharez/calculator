@@ -65,6 +65,7 @@ sign.addEventListener('click', function(){
     };
 });
 
+// Main Code to operate on numbers
 operators.forEach((button) => {
     button.addEventListener('click', function() {
         if(total === ''){
@@ -75,7 +76,6 @@ operators.forEach((button) => {
                 result = operate(button.textContent, total, current);
                 display.textContent = result;
                 total = result;
-                console.log(`total: ${total}, current: ${current}  if result: ${result}`);
                 current = '';
             });
         }else{
@@ -87,7 +87,6 @@ operators.forEach((button) => {
             display.textContent = result;
             total = result;
             current = '';
-            console.log(`total: ${total}, current: ${current} else result: ${result}`);
         };
         previousOperator = button.textContent;
     });
