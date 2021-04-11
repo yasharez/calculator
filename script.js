@@ -1,9 +1,12 @@
 let total = '';
 let current = '';
-let addResult;
-let subtractResult;
-let mulitplyResult;
-let divideResult;
+// let addResult;
+// let subtractResult;
+// let mulitplyResult;
+// let divideResult;
+let result;
+let divText = '\u00F7';
+let multText = '\u00D7';
 
 const display = document.getElementById('display');
 const numberButtons = document.querySelectorAll('.numbers');
@@ -11,7 +14,7 @@ const period = document.getElementById('dot');
 const del = document.getElementById('del');
 const clear = document.getElementById('clear');
 const sign = document.getElementById('sign');
-const operators = document.querySelectorAll('operators');
+const operators = document.querySelectorAll('.operators');
 const addBtn = document.getElementById('add');
 const subtractBtn = document.getElementById('subtract');
 const multiplyBtn = document.getElementById('multiply');
@@ -60,104 +63,78 @@ sign.addEventListener('click', function(){
     };
 });
 
-addBtn.addEventListener('click', function(){
-    if(total === ''){
-        total = current;
-        current = '';
-        display.textContent = '0';
-        equals.addEventListener('click', function(){
-            addResult = add(total, current);
-            display.textContent = String(addResult);
-            total = addResult;
-            console.log(`add1 log: total: ${total}, current: ${current} addResult: ${addResult}`);
-        });
-    }else{
-        addResult = add(total, current);
-        display.textContent = String(addResult);
-        total = addResult;
-        current = '';
-        console.log(`add2 log: total: ${total}, current: ${current} addResult: ${addResult}`);
-    }
+operators.forEach((button) => {
+    button.addEventListener('click', function() {
+        if(total === ''){
+            total = current;
+            current = '';
+            display.textContent = '0';
+            equals.addEventListener('click', function(){
+                switch(button.textContent){
+                    case '+':
+                        result = add(total, current);
+                        break;
+                    case '-':
+                        result = subtract(total, current);
+                        break;
+                    case '\u00F7':
+                        result = divide(total, current);
+                        break;
+                    case '\u00D7':
+                        result = multiply(total, current);
+                        break;
+                };
+                display.textContent = String(result);
+                total = result;
+                console.log(`total: ${total}, current: ${current} result: ${result}`);
+            });
+        }else{
+            switch(button.textContent){
+                case '+':
+                    result = add(total, current);
+                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
+                    break;
+                case '-':
+                    result = subtract(total, current);
+                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
+                    break;
+                case '\u00F7':
+                    result = divide(total, current);
+                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
+                    break;
+                case '\u00D7':
+                    result = multiply(total, current);
+                    console.log(`total: ${total}, current: ${current} result: ${result} ${button.textContent}`);
+                    break;
+            };
+            display.textContent = String(result);
+            total = result;
+            current = '';
+            console.log(`total: ${total}, current: ${current} result: ${result}`);
+        };
+    });
 });
-
-subtractBtn.addEventListener('click', function(){
-    if(total === ''){
-        total = current;
-        current = '';
-        display.textContent = '0';
-        equals.addEventListener('click', function(){
-            subtractResult = subtract(total, current);
-            display.textContent = String(subtractResult);
-            console.log(`sub1 log: total: ${total}, current: ${current} subtractResult: ${subtractResult}`);
-        });
-    }else{
-        subtractResult = subtract(total, current);
-        display.textContent = String(subtractResult);
-        total = subtractResult;
-        current = '';
-        console.log(`sub2 log: total: ${total}, current: ${current} subtractResult: ${subtractResult}`);
-    }
-});
-
-multiplyBtn.addEventListener('click', function(){
-    if(total === ''){
-        total = current;
-        current = '';
-        display.textContent = '0';
-        equals.addEventListener('click', function(){
-            multiplyResult = multiply(total, current);
-            display.textContent = String(multiplyResult);
-            console.log(`mult1 log: total: ${total}, current: ${current} multiplyResult: ${multiplyResult}`);
-        });
-    }else{
-        multiplyResult = multiply(total, current);
-        display.textContent = String(multiplyResult);
-        total = multiplyResult;
-        current = '';
-        console.log(`mult2 log: total: ${total}, current: ${current} multiplyResult: ${multiplyResult}`);
-    }
-});
-
-divideBtn.addEventListener('click', function(){
-    if(total === ''){
-        total = current;
-        current = '';
-        display.textContent = '0';
-        equals.addEventListener('click', function(){
-            divideResult = divide(total, current);
-            display.textContent = String(divideResult);
-            console.log(`div1 log: total: ${total}, current: ${current} divideResult: ${divideResult}`);
-        });
-    }else{
-        divideResult = divide(total, current);
-        display.textContent = String(divideResult);
-        total = divideResult;
-        current = '';
-        console.log(`div2 log: total: ${total}, current: ${current} divideResult: ${divideResult}`);
-    }
-});
-
 
 function add (num1, num2){
     num1 = Number(num1);
     num2 = Number(num2);
     return num1 + num2;
-}
+};
 
 function subtract (num1, num2){
     num1 = Number(num1);
     num2 = Number(num2);
     return num1 - num2;
-}
+};
 
 function multiply (num1, num2){
     num1 = Number(num1);
     num2 = Number(num2);
     return num1 * num2;
-}
+};
 
 function divide (num1, num2){
     num1 = Number(num1);
     num2 = Number(num2);
     return num1 / num2;
-}
+};

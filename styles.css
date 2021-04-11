@@ -85,6 +85,8 @@ button{
 }
 
 .button-equals{
+    background-color: rgb(255, 187, 0);
+    color: white;
     grid-column: 4 / 5;
     grid-row: 6 / 6;
 }
