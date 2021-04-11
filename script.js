@@ -70,20 +70,26 @@ operators.forEach((button) => {
         if(total === ''){
             total = current;
             current = '';
-            display.textContent = String(total);
+            display.textContent = total;
             equals.addEventListener('click', function(){
                 result = operate(button.textContent, total, current);
                 display.textContent = result;
                 total = result;
-                console.log(`total: ${total}, current: ${current} result: ${result}`);
+                console.log(`total: ${total}, current: ${current}  if result: ${result}`);
+                current = '';
             });
         }else{
-            result = operate(button.textContent, total, current);
+            if(previousOperator !== button.textContent){
+                result = operate(previousOperator, total, current);
+            }else{
+                result = operate(button.textContent, total, current);
+            };
             display.textContent = result;
             total = result;
             current = '';
-            console.log(`total: ${total}, current: ${current} result: ${result}`);
+            console.log(`total: ${total}, current: ${current} else result: ${result}`);
         };
+        previousOperator = button.textContent;
     });
 });
 
