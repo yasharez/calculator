@@ -62,7 +62,9 @@ equals.addEventListener('click', function(){
         display.textContent = operate(operation, total, current);
         screenReset = true;
         operation = '';
+        current = '';
     };
+    console.log('succesfully ran equal function')
 });
 
 // if(total === ''){
@@ -111,8 +113,10 @@ function operate(operator, num1, num2){
 
 // Function that clears display and 'current' variable NEEDS WORK
 clear.addEventListener('click', function() {
-    display.textContent = '0';
+    total = '';
+    current = '';
     period.disabled = false;
+    resetScreen();
 });
 
 // Function that adds a decimal to display/'current' variable NEEDS WORK
@@ -122,24 +126,25 @@ period.addEventListener('click', function(){
     display.textContent = current;
 });
 
-// Function that removes last display entry NEED TO CHECK
+// Function that removes last display entry
 del.addEventListener('click', function(){
     let deleted = display.textContent.slice(display.textContent.length - 1);
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     if(deleted === '.'){
         period.disabled = false;
     };
+    if(display.textContent.length === 0 || display.textContent === '-'){
+        display.textContent = '0';
+    };
 });
 
-// Function to change sign of 'current' variable NEEDS WORK
+// Function to change sign of 'current' variable
 sign.addEventListener('click', function(){
-    if(display.length > 0){
-        if(current.slice(0,1) !== '-'){
-            current = '-' + current;
-            display.textContent = current;
-        }else if(current.slice(0,1) === '-'){
-            current = current.slice(1);
-            display.textContent = current;
+    if(display.textContent.length > 0){
+        if(display.textContent.slice(0,1) !== '-'){
+            display.textContent = '-' + display.textContent;
+        }else if(display.textContent.slice(0,1) === '-'){
+            display.textContent = display.textContent.slice(1);
         };
     };
 });
