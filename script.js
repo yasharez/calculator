@@ -22,7 +22,7 @@ const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        console.log(`total: ${total}, current: ${current}, operator: ${operation}`)
+        console.log(`AT TOP total: ${total}, current: ${current}, operator: ${operation}`)
     });
 });
 
@@ -32,14 +32,15 @@ numberButtons.forEach((button) => {
         if(screenReset) resetScreen();
         if(display.textContent === '0'){
             display.textContent = '';
+            current = '';
         }
         display.textContent += button.textContent;
     });
 });
 
-// Main Code to operate on numbers
+// Main Code to operate on numbers 
 operators.forEach((button) => {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function() { //GETTING OFF HERE 
         operation = button.textContent;
         if (total === ''){
             total = display.textContent;
@@ -48,24 +49,12 @@ operators.forEach((button) => {
             current = display.textContent;
             total = operate(operation, total, current);
             display.textContent = total;
-            console.log(operation);
-            operation = '';
             screenReset = true;
-        }
-        console.log(operation);
+        };
     });
 });
 
-equals.addEventListener('click', function(){
-    current = display.textContent;
-    if(total !== '' && current !== ''){
-        display.textContent = operate(operation, total, current);
-        screenReset = true;
-        operation = '';
-        current = '';
-    };
-    console.log('succesfully ran equal function')
-});
+equals.addEventListener('click', function(){solve()});
 
 // if(total === ''){
 //     total = current;
@@ -111,7 +100,7 @@ function operate(operator, num1, num2){
     };
 };
 
-// Function that clears display and 'current' variable NEEDS WORK
+// Function that clears display and 'current' variable
 clear.addEventListener('click', function() {
     total = '';
     current = '';
@@ -119,11 +108,10 @@ clear.addEventListener('click', function() {
     resetScreen();
 });
 
-// Function that adds a decimal to display/'current' variable NEEDS WORK
+// Function that adds a decimal to display/'current' variable
 period.addEventListener('click', function(){
     period.disabled = true;
-    current += period.textContent;
-    display.textContent = current;
+    display.textContent += period.textContent;
 });
 
 // Function that removes last display entry
@@ -131,7 +119,6 @@ del.addEventListener('click', function(){
     let deleted = display.textContent.slice(display.textContent.length - 1);
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     if(deleted === '.'){
-        period.disabled = false;
     };
     if(display.textContent.length === 0 || display.textContent === '-'){
         display.textContent = '0';
@@ -152,4 +139,22 @@ sign.addEventListener('click', function(){
 function resetScreen(){
     display.textContent = '0';
     screenReset = false;
-}
+};
+
+function solve(){
+    current = display.textContent;
+    if(total !== '' && current !== '' && operation !== ''){
+        display.textContent = operate(operation, total, current);
+        total = display.textContent;
+        screenReset = true;
+        operation = '';
+    };
+    console.log('succesfully ran equal function');
+    return total;
+};
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        console.log(`AT BOTTOM total: ${total}, current: ${current}, operator: ${operation}`)
+    });
+});
