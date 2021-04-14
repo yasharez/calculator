@@ -40,43 +40,23 @@ numberButtons.forEach((button) => {
 
 // Main Code to operate on numbers 
 operators.forEach((button) => {
-    button.addEventListener('click', function() { //GETTING OFF HERE 
+    button.addEventListener('click', function() {
+        if(screenReset) resetScreen();
         operation = button.textContent;
         if (total === ''){
             total = display.textContent;
             screenReset = true;
         }else{
             current = display.textContent;
-            total = operate(operation, total, current);
+            total = solve();
             display.textContent = total;
+            current = '';
             screenReset = true;
         };
     });
 });
 
 equals.addEventListener('click', function(){solve()});
-
-// if(total === ''){
-//     total = current;
-//     current = '';
-//     display.textContent = total;
-//     equals.addEventListener('click', function(){
-//         result = operate(button.textContent, total, current);
-//         display.textContent = result;
-//         total = result;
-//         current = '';
-//     });
-// }else{
-//     if(operation !== button.textContent){
-//         result = operate(operation, total, current);
-//     }else{
-//         result = operate(button.textContent, total, current);
-//     };
-//     display.textContent = result;
-//     total = result;
-//     current = '';
-// };
-// operation = button.textContent;
 
 // Function that outputs the result of two entries and operator
 function operate(operator, num1, num2){
@@ -144,12 +124,11 @@ function resetScreen(){
 function solve(){
     current = display.textContent;
     if(total !== '' && current !== '' && operation !== ''){
-        display.textContent = operate(operation, total, current);
-        total = display.textContent;
-        screenReset = true;
+        total = operate(operation, total, current);
+        display.textContent = total;
         operation = '';
     };
-    console.log('succesfully ran equal function');
+    console.log('succesfully ran solve');
     return total;
 };
 
