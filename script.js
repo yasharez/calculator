@@ -41,22 +41,23 @@ numberButtons.forEach((button) => {
 // Main Code to operate on numbers 
 operators.forEach((button) => {
     button.addEventListener('click', function() {
-        if(screenReset) resetScreen();
         operation = button.textContent;
+        if(screenReset) resetScreen();
         if (total === ''){
             total = display.textContent;
             screenReset = true;
-        }else{
+        }else if(total !== '' && current === ''){
             current = display.textContent;
             total = solve();
-            display.textContent = total;
-            current = '';
             screenReset = true;
         };
     });
 });
 
-equals.addEventListener('click', function(){solve()});
+equals.addEventListener('click', function(){
+    current = display.textContent;
+    solve();
+});
 
 // Function that outputs the result of two entries and operator
 function operate(operator, num1, num2){
@@ -122,15 +123,17 @@ function resetScreen(){
 };
 
 function solve(){
-    current = display.textContent;
-    if(total !== '' && current !== '' && operation !== ''){
+    if(operation !== ''){
         total = operate(operation, total, current);
         display.textContent = total;
-        operation = '';
     };
     console.log('succesfully ran solve');
+    operation = '';
+    current = '';
     return total;
 };
+
+
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
