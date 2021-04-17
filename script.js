@@ -7,6 +7,7 @@ let total = '';
 let current = '';
 let result;
 let operation = '';
+let previousOperation = '';
 let screenReset = false;
 
 // Grab the needed DOM elements
@@ -46,17 +47,18 @@ operators.forEach((button) => {
         if (total === ''){
             total = display.textContent;
             screenReset = true;
-        }else if(total !== '' && current === ''){
+        }else if(previousOperation !== operation){
             current = display.textContent;
-            total = solve();
+            total = solve(previousOperation);
             screenReset = true;
         };
+        previousOperation = operation;
     });
 });
 
 equals.addEventListener('click', function(){
     current = display.textContent;
-    solve();
+    solve(operation);
 });
 
 // Function that outputs the result of two entries and operator
@@ -122,9 +124,9 @@ function resetScreen(){
     screenReset = false;
 };
 
-function solve(){
+function solve(currentOperator){
     if(operation !== ''){
-        total = operate(operation, total, current);
+        total = operate(currentOperator, total, current);
         display.textContent = total;
     };
     console.log('succesfully ran solve');
