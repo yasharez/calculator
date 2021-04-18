@@ -64,31 +64,11 @@ operators.forEach((button) => {
 
 equals.addEventListener('click', function(){
     current = display.textContent;
-    solve(operation);
+    total = solve(previousOperation);
     operation = '';
+    screenReset = true;
 });
 
-// Function that outputs the result of two entries and operator
-function operate(operator, num1, num2){
-    switch(operator){
-        case '+':
-            num1 = Number(num1);
-            num2 = Number(num2);
-            return String(num1 + num2);
-        case '-':
-            num1 = Number(num1);
-            num2 = Number(num2);
-            return String(num1 - num2);
-        case '\u00F7':
-            num1 = Number(num1);
-            num2 = Number(num2);
-            return String(num1 / num2);
-        case '\u00D7':
-            num1 = Number(num1);
-            num2 = Number(num2);
-            return String(num1 * num2);
-    };
-};
 
 // Function that clears display and 'current' variable
 clear.addEventListener('click', function() {
@@ -148,3 +128,25 @@ buttons.forEach((button) => {
         console.log(`AT BOTTOM total: ${total}, current: ${current}, operator: ${operation}`)
     });
 });
+
+// Function that outputs the result of two entries and operator
+function operate(operator, num1, num2){
+    switch(operator){
+        case '+':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 + num2);
+        case '-':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 - num2);
+        case '\u00F7':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 / num2);
+        case '\u00D7':
+            num1 = Number(num1);
+            num2 = Number(num2);
+            return String(num1 * num2);
+    };
+};
