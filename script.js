@@ -49,7 +49,13 @@ operators.forEach((button) => {
             screenReset = true;
         }else if(previousOperation !== operation){
             current = display.textContent;
+            console.log('current is: ' + current);
             total = solve(previousOperation);
+            screenReset = true;
+        }else{
+            current = display.textContent;
+            console.log('current is: ' + current);
+            total = solve(operation);
             screenReset = true;
         };
         previousOperation = operation;
@@ -130,7 +136,6 @@ function solve(currentOperator){
         display.textContent = total;
     };
     console.log('succesfully ran solve');
-    operation = '';
     current = '';
     return total;
 };
