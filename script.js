@@ -52,7 +52,7 @@ operators.forEach((button) => {
             console.log('current is: ' + current);
             total = solve(previousOperation);
             screenReset = true;
-        }else{
+        }else if(operation !== ''){
             current = display.textContent;
             console.log('current is: ' + current);
             total = solve(operation);
@@ -65,6 +65,7 @@ operators.forEach((button) => {
 equals.addEventListener('click', function(){
     current = display.textContent;
     solve(operation);
+    operation = '';
 });
 
 // Function that outputs the result of two entries and operator
