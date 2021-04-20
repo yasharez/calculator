@@ -9,6 +9,7 @@ let result;
 let operation = '';
 let previousOperation = '';
 let screenReset = false;
+let shouldOperate = false;
 
 // Grab the needed DOM elements
 const display = document.getElementById('display');
@@ -21,12 +22,6 @@ const operators = document.querySelectorAll('.operators');
 const equals = document.getElementById('equals');
 const buttons = document.querySelectorAll('button');
 
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        console.log(`AT TOP total: ${total}, current: ${current}, operator: ${operation}`)
-    });
-});
-
 // Populate the display and 'current' variable with numbers inputted by user
 numberButtons.forEach((button) => {
     button.addEventListener('click', function() {
@@ -36,6 +31,7 @@ numberButtons.forEach((button) => {
             current = '';
         }
         display.textContent += button.textContent;
+        shouldOperate = true;
     });
 });
 
@@ -43,20 +39,20 @@ numberButtons.forEach((button) => {
 operators.forEach((button) => {
     button.addEventListener('click', function() {
         operation = button.textContent;
-        if(screenReset) resetScreen();
-        if (total === ''){
-            total = display.textContent;
-            screenReset = true;
-        }else if(previousOperation !== operation){
-            current = display.textContent;
-            console.log('current is: ' + current);
-            total = solve(previousOperation);
-            screenReset = true;
-        }else if(operation !== ''){
-            current = display.textContent;
-            console.log('current is: ' + current);
-            total = solve(operation);
-            screenReset = true;
+        if(shouldOperate){
+            if(screenReset) resetScreen();
+            if (total === ''){
+                total = display.textContent;
+                screenReset = true;
+            }else if(previousOperation !== operation){
+                current = display.textContent;
+                total = solve(previousOperation);
+                screenReset = true;
+            }else if(operation !== ''){
+                current = display.textContent;
+                total = solve(operation);
+                screenReset = true;
+            };
         };
         previousOperation = operation;
     });
@@ -81,7 +77,12 @@ clear.addEventListener('click', function() {
 // Function that adds a decimal to display/'current' variable
 period.addEventListener('click', function(){
     period.disabled = true;
-    display.textContent += period.textContent;
+    if(display.textContent.indexOf('.') === -1){
+        display.textContent += period.textContent;
+    };
+    
+    screenReset = false;
+    shouldOperate = false;
 });
 
 // Function that removes last display entry
@@ -89,6 +90,7 @@ del.addEventListener('click', function(){
     let deleted = display.textContent.slice(display.textContent.length - 1);
     display.textContent = display.textContent.slice(0, display.textContent.length - 1);
     if(deleted === '.'){
+        period.disabled = false;
     };
     if(display.textContent.length === 0 || display.textContent === '-'){
         display.textContent = '0';
@@ -116,18 +118,11 @@ function solve(currentOperator){
         total = operate(currentOperator, total, current);
         display.textContent = total;
     };
-    console.log('succesfully ran solve');
+    console.log(`succesfully ran solve. Total: ${total}, Current: ${current}, currentOperator: ${currentOperator}`);
     current = '';
+    shouldOperate = false;
     return total;
 };
-
-
-
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        console.log(`AT BOTTOM total: ${total}, current: ${current}, operator: ${operation}`)
-    });
-});
 
 // Function that outputs the result of two entries and operator
 function operate(operator, num1, num2){
