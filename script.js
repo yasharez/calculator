@@ -21,6 +21,10 @@ const sign = document.getElementById('sign');
 const operators = document.querySelectorAll('.operators');
 const equals = document.getElementById('equals');
 const buttons = document.querySelectorAll('button');
+const addButton = document.getElementById('add');
+const subtractButton = document.getElementById('subtract');
+const multiplyButton = document.getElementById('multiply');
+const divideButton = document.getElementById('divide');
 
 // Populate the display and 'current' variable with numbers inputted by user
 numberButtons.forEach((button) => {
@@ -44,6 +48,7 @@ numberButtons.forEach((button) => {
 // Main Code to operate on numbers 
 operators.forEach((button) => {
     button.addEventListener('click', function() {
+        button.classList.add('active-operators');
         operation = button.textContent;
         if(shouldOperate){
             if(screenReset) resetScreen();
@@ -105,21 +110,6 @@ del.addEventListener('click', function(){
     shouldOperate = false;
 });
 
-// // Function to change sign of 'current' variable TESTING FUNCTIONALITY
-// sign.addEventListener('click', function(){
-//     if(display.textContent.length > 0){
-//         if(display.textContent.slice(0,1) !== '-'){
-//             display.textContent = '-' + display.textContent;
-//         }else if(display.textContent.slice(0,1) === '-'){
-//             display.textContent = display.textContent.slice(1);
-//         };
-//         //STOPPED HERE WITH DEBUGGING SIGN CHANGE
-//         total = display.textContent;
-//         current = '';
-//         shouldOperate = false;
-//     };
-// });
-
 function resetScreen(){
     display.textContent = '0';
     screenReset = false;
@@ -134,6 +124,7 @@ function solve(currentOperator){
     current = '';
     shouldOperate = false;
     period.disabled = false;
+    resetOperatorStyle();
     return total;
 };
 
@@ -158,3 +149,25 @@ function operate(operator, num1, num2){
             return String(num1 * num2);
     };
 };
+
+function resetOperatorStyle(){
+    addButton.classList.remove('active-operators');
+    subtractButton.classList.remove('active-operators');
+    multiplyButton.classList.remove('active-operators');
+    divideButton.classList.remove('active-operators');
+}
+
+// // Function to change sign of 'current' variable TESTING FUNCTIONALITY
+// sign.addEventListener('click', function(){
+//     if(display.textContent.length > 0){
+//         if(display.textContent.slice(0,1) !== '-'){
+//             display.textContent = '-' + display.textContent;
+//         }else if(display.textContent.slice(0,1) === '-'){
+//             display.textContent = display.textContent.slice(1);
+//         };
+//         //STOPPED HERE WITH DEBUGGING SIGN CHANGE
+//         total = display.textContent;
+//         current = '';
+//         shouldOperate = false;
+//     };
+// });
