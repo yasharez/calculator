@@ -10,6 +10,7 @@ let operation = '';
 let previousOperation = '';
 let screenReset = false;
 let shouldOperate = false;
+let signChange = false; // NEED TO THINK ABOUT HOW TO IMPLEMENT SIGN CHAGNE BETWEEN CURRENT AND TOTAL
 
 // Grab the needed DOM elements
 const display = document.getElementById('display');
@@ -65,13 +66,13 @@ operators.forEach((button) => {
     });
 });
 
+// Function for equal button that solves most recent operation
 equals.addEventListener('click', function(){
     current = display.textContent;
     total = solve(previousOperation);
     operation = '';
     screenReset = true;
 });
-
 
 // Function that clears display and 'current' variable
 clear.addEventListener('click', function() {
@@ -100,6 +101,9 @@ del.addEventListener('click', function(){
     if(display.textContent.length === 0 || display.textContent === '-'){
         display.textContent = '0';
     };
+    total = display.textContent;
+    current = '';
+    shouldOperate = false;
 });
 
 // Function to change sign of 'current' variable
@@ -110,6 +114,10 @@ sign.addEventListener('click', function(){
         }else if(display.textContent.slice(0,1) === '-'){
             display.textContent = display.textContent.slice(1);
         };
+        //STOPPED HERE WITH DEBUGGING SIGN CHANGE
+        total = display.textContent;
+        current = '';
+        shouldOperate = false;
     };
 });
 
