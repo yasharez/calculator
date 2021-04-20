@@ -31,7 +31,13 @@ numberButtons.forEach((button) => {
             current = '';
         }
         display.textContent += button.textContent;
-        shouldOperate = true;
+        if(display.textContent.indexOf('.') !== -1 && period.disabled){
+            total = display.textContent;
+            current = '';
+            shouldOperate = false;
+        }else{
+            shouldOperate = true;
+        }
     });
 });
 
@@ -54,6 +60,7 @@ operators.forEach((button) => {
                 screenReset = true;
             };
         };
+        screenReset = true;
         previousOperation = operation;
     });
 });
@@ -80,9 +87,7 @@ period.addEventListener('click', function(){
     if(display.textContent.indexOf('.') === -1){
         display.textContent += period.textContent;
     };
-    
     screenReset = false;
-    shouldOperate = false;
 });
 
 // Function that removes last display entry
@@ -121,6 +126,7 @@ function solve(currentOperator){
     console.log(`succesfully ran solve. Total: ${total}, Current: ${current}, currentOperator: ${currentOperator}`);
     current = '';
     shouldOperate = false;
+    // remove period button disable
     return total;
 };
 
