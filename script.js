@@ -5,7 +5,6 @@
 // Initialize variables we will need later on
 let total = '';
 let current = '';
-let result;
 let operation = '';
 let previousOperation = '';
 let screenReset = false;
@@ -134,7 +133,7 @@ function solve(currentOperator){
     console.log(`succesfully ran solve. Total: ${total}, Current: ${current}, currentOperator: ${currentOperator}`);
     current = '';
     shouldOperate = false;
-    // remove period button disable
+    period.disabled = false;
     return total;
 };
 
