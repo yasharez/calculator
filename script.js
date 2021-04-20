@@ -9,7 +9,7 @@ let operation = '';
 let previousOperation = '';
 let screenReset = false;
 let shouldOperate = false;
-let signChange = false; // NEED TO THINK ABOUT HOW TO IMPLEMENT SIGN CHAGNE BETWEEN CURRENT AND TOTAL
+let newSignChange = false;
 
 // Grab the needed DOM elements
 const display = document.getElementById('display');
@@ -105,20 +105,20 @@ del.addEventListener('click', function(){
     shouldOperate = false;
 });
 
-// Function to change sign of 'current' variable
-sign.addEventListener('click', function(){
-    if(display.textContent.length > 0){
-        if(display.textContent.slice(0,1) !== '-'){
-            display.textContent = '-' + display.textContent;
-        }else if(display.textContent.slice(0,1) === '-'){
-            display.textContent = display.textContent.slice(1);
-        };
-        //STOPPED HERE WITH DEBUGGING SIGN CHANGE
-        total = display.textContent;
-        current = '';
-        shouldOperate = false;
-    };
-});
+// // Function to change sign of 'current' variable TESTING FUNCTIONALITY
+// sign.addEventListener('click', function(){
+//     if(display.textContent.length > 0){
+//         if(display.textContent.slice(0,1) !== '-'){
+//             display.textContent = '-' + display.textContent;
+//         }else if(display.textContent.slice(0,1) === '-'){
+//             display.textContent = display.textContent.slice(1);
+//         };
+//         //STOPPED HERE WITH DEBUGGING SIGN CHANGE
+//         total = display.textContent;
+//         current = '';
+//         shouldOperate = false;
+//     };
+// });
 
 function resetScreen(){
     display.textContent = '0';
