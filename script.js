@@ -9,7 +9,7 @@ let operation = '';
 let previousOperation = '';
 let screenReset = false;
 let shouldOperate = false;
-let newSignChange = false;
+let textOverflow = false;
 
 // Grab the needed DOM elements
 const display = document.getElementById('display');
@@ -36,11 +36,10 @@ numberButtons.forEach((button) => {
         }
         display.textContent += button.textContent;
         if(display.textContent.indexOf('.') !== -1 && period.disabled){
-            total = display.textContent;
-            current = '';
-            shouldOperate = false;
-        }else{
+            current = display.textContent;
             shouldOperate = true;
+        }else{
+            shouldOperate = false;
         }
     });
 });
@@ -48,7 +47,7 @@ numberButtons.forEach((button) => {
 // Main Code to operate on numbers 
 operators.forEach((button) => {
     button.addEventListener('click', function() {
-        button.classList.add('active-operators');
+        resetOperatorStyle();
         operation = button.textContent;
         if(shouldOperate){
             if(screenReset) resetScreen();
@@ -84,6 +83,7 @@ clear.addEventListener('click', function() {
     current = '';
     period.disabled = false;
     resetScreen();
+    resetOperatorStyle();
 });
 
 // Function that adds a decimal to display/'current' variable
@@ -156,6 +156,22 @@ function resetOperatorStyle(){
     multiplyButton.classList.remove('active-operators');
     divideButton.classList.remove('active-operators');
 }
+
+addButton.addEventListener('click', () => {
+    addButton.classList.add('active-operators');
+});
+
+subtractButton.addEventListener('click', () => {
+    subtractButton.classList.add('active-operators');
+});
+
+multiplyButton.addEventListener('click', () => {
+    multiplyButton.classList.add('active-operators');
+});
+
+divideButton.addEventListener('click', () => {
+    divideButton.classList.add('active-operators');
+});
 
 // // Function to change sign of 'current' variable TESTING FUNCTIONALITY
 // sign.addEventListener('click', function(){
