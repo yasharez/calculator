@@ -9,7 +9,6 @@ let operation = '';
 let previousOperation = '';
 let screenReset = false;
 let shouldOperate = false;
-let textOverflow = false;
 
 // Grab the needed DOM elements
 const display = document.getElementById('display');
@@ -36,7 +35,7 @@ numberButtons.forEach((button) => {
         }
         display.textContent += button.textContent;
         if(display.textContent.indexOf('.') !== -1 && period.disabled){
-            current = display.textContent;
+            current = display.textContent; //trying to do something here
             shouldOperate = false;
         }else{
             shouldOperate = true;
@@ -87,13 +86,7 @@ clear.addEventListener('click', function() {
 });
 
 // Function that adds a decimal to display/'current' variable
-period.addEventListener('click', function(){
-    period.disabled = true;
-    if(display.textContent.indexOf('.') === -1){
-        display.textContent += period.textContent;
-    };
-    screenReset = false;
-});
+period.addEventListener('click', function() {implementPeriod()});
 
 // Function that removes last display entry
 del.addEventListener('click', function(){
@@ -109,6 +102,15 @@ del.addEventListener('click', function(){
     current = '';
     shouldOperate = false;
 });
+
+function implementPeriod(){
+    period.disabled = true;
+    if(display.textContent.indexOf('.') === -1){
+        display.textContent += period.textContent;
+        shouldOperate = true;
+    };
+    screenReset = false;
+};
 
 function resetScreen(){
     display.textContent = '0';
@@ -157,6 +159,7 @@ function resetOperatorStyle(){
     divideButton.classList.remove('active-operators');
 }
 
+// Change status of operator buttons as they become active
 addButton.addEventListener('click', () => {
     addButton.classList.add('active-operators');
 });
@@ -173,7 +176,7 @@ divideButton.addEventListener('click', () => {
     divideButton.classList.add('active-operators');
 });
 
-// // Function to change sign of 'current' variable TESTING FUNCTIONALITY
+// // Function to change sign of 'current' variable
 // sign.addEventListener('click', function(){
 //     if(display.textContent.length > 0){
 //         if(display.textContent.slice(0,1) !== '-'){
