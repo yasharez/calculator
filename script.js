@@ -37,9 +37,9 @@ numberButtons.forEach((button) => {
         display.textContent += button.textContent;
         if(display.textContent.indexOf('.') !== -1 && period.disabled){
             current = display.textContent;
-            shouldOperate = true;
-        }else{
             shouldOperate = false;
+        }else{
+            shouldOperate = true;
         }
     });
 });
