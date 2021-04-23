@@ -35,11 +35,9 @@ numberButtons.forEach((button) => {
         }
         display.textContent += button.textContent;
         if(display.textContent.indexOf('.') !== -1 && period.disabled){
-            current = display.textContent; //trying to do something here
-            shouldOperate = false;
-        }else{
-            shouldOperate = true;
-        }
+            current = display.textContent; 
+        };
+        shouldOperate = true;
     });
 });
 
@@ -51,6 +49,9 @@ operators.forEach((button) => {
         if(shouldOperate){
             if(screenReset) resetScreen();
             if (total === ''){
+                total = display.textContent;
+                screenReset = true;
+            }else if(total === '' && display.textContent.indexOf('.') !== -1){
                 total = display.textContent;
                 screenReset = true;
             }else if(previousOperation !== operation){
@@ -119,7 +120,7 @@ function resetScreen(){
 
 function solve(currentOperator){
     if(operation !== ''){
-        total = operate(currentOperator, total, current);
+        total = Math.round(operate(currentOperator, total, current) * 1000) / 1000;
         display.textContent = total;
     };
     console.log(`succesfully ran solve. Total: ${total}, Current: ${current}, currentOperator: ${currentOperator}`);
