@@ -145,7 +145,13 @@ function operate(operator, num1, num2){
         case '\u00F7':
             num1 = Number(num1);
             num2 = Number(num2);
-            return String(num1 / num2);
+            if(num2 === 0){
+                alert('ERROR: Cannot Divide by 0');
+                location.reload();
+                break;
+            }else{
+                return String(num1 / num2);
+            }
         case '\u00D7':
             num1 = Number(num1);
             num2 = Number(num2);
