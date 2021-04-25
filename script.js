@@ -46,9 +46,14 @@ operators.forEach((button) => {
     button.addEventListener('click', function() {
         resetOperatorStyle();
         operation = button.textContent;
+        if(total === ''){
+            total = display.textContent;
+            screenReset =  true;
+            shouldOperate = false;
+        };
         if(shouldOperate){
             if(screenReset) resetScreen();
-            if (total === ''){
+            if(total === ''){
                 total = display.textContent;
                 screenReset = true;
             }else if(total === '' && display.textContent.indexOf('.') !== -1){
@@ -123,7 +128,6 @@ function solve(currentOperator){
         total = Math.round(operate(currentOperator, total, current) * 1000) / 1000;
         display.textContent = total;
     };
-    console.log(`succesfully ran solve. Total: ${total}, Current: ${current}, currentOperator: ${currentOperator}`);
     current = '';
     shouldOperate = false;
     period.disabled = false;

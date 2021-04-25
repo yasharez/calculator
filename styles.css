@@ -2,7 +2,7 @@ body{
     display: flex;
     justify-content: center;
     background-color: rgb(33, 40, 58);
-    margin-top: 50px;
+    margin-top: 100px;
     font-family: sans-serif;
     
 }
@@ -23,11 +23,12 @@ button{
 
 .calculator{
     display: grid;
-    grid-template: 60px 60px 60px 60px 60px 60px / 60px 60px 60px 60px;
+    grid-template: auto 60px 60px 60px 60px 60px / 60px 60px 60px 60px;
     gap: 4px;
 }
 
 .display{
+    overflow-wrap: break-word;
     align-self: stretch;
     text-align: end;
     font-size: 3rem;
